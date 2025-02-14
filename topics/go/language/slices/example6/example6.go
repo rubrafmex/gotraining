@@ -89,6 +89,10 @@ func main() {
 		copy(buf[:], s[i:si])
 
 		// Display the details.
+
+		// ----- ruben
+		// Here you see how we iterate codepoint by codepoint (you see the bytes also of each codepoint).
+		// See how the chinese characters are each a 3 byte codepoint:
 		fmt.Printf("%2d: %q; codepoint: %#6x; encoded bytes: %#v\n\n", i, r, r, buf[:rl])
 	}
 }
