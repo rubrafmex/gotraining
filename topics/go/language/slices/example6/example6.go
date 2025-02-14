@@ -34,6 +34,21 @@ import (
 
 func main() {
 
+	// ----- ruben
+
+	// strings in go are UTF-8 based
+	// UTF-8 is a 3 layer character set:
+
+	// on top you have characters
+	// in the middle you have codepoints (32 bit or 4 byte value)
+	// at the bottom you have bytes
+
+	// Explanation:
+	// The idea is that a codepoint is anywhere from 1 to 4 bytes
+	// and a character is anywhere from 1 to multiple codepoints.
+
+	// ----- ruben
+
 	// Declare a string with both chinese and english characters.
 	s := "世界 means world"
 
@@ -42,6 +57,26 @@ func main() {
 
 	// Iterate over the string.
 	for i, r := range s {
+
+		// Ruben notes:
+		//
+		// When ranging over a string we iterate codepoint by codepoint:
+		// i is the index of the codepoint
+		// r is going to give us back in that position the codepoint that we just iterated over
+		// r represents the type rune.
+		// In go 'rune' IS NOT A TYPE, IT IS AN ALIAS for int32
+		// the same happens to type 'byte' it is also an alias for uint8
+		//
+		// r represents rune, so our 32 bit or 4 byte value
+		//
+		// See the following to see what is being printed to console:
+
+		fmt.Println(i, r)
+
+		// In fmt.Printf:
+		// %q is Quoted character (for Character (quoted, Unicode))
+		// %d is Base 10 (for Integer)
+		fmt.Printf("%q, %d\n", r, utf8.RuneLen(r))
 
 		// Capture the number of bytes for this rune.
 		rl := utf8.RuneLen(r)
@@ -54,6 +89,6 @@ func main() {
 		copy(buf[:], s[i:si])
 
 		// Display the details.
-		fmt.Printf("%2d: %q; codepoint: %#6x; encoded bytes: %#v\n", i, r, r, buf[:rl])
+		fmt.Printf("%2d: %q; codepoint: %#6x; encoded bytes: %#v\n\n", i, r, r, buf[:rl])
 	}
 }
