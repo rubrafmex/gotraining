@@ -34,6 +34,13 @@ func main() {
 	// receivers don't belong to the method set of a value.
 
 	sendNotification(u)
+	// ----- ruben
+	// what the compiler has done is said, when we are restoring
+	// data inside of an interface, we are never going to allow
+	// ourselves to break this major law of pointer semantics to value semantics.
+	//
+	// GOLDEN RULE: We are NEVER allowed to make a copy of the value that a pointer points to, IT IS NOT SAFE.
+	// ----- ruben
 
 	// ./example1.go:36: cannot use u (type user) as type notifier in argument to sendNotification:
 	//   user does not implement notifier (notify method has pointer receiver)
