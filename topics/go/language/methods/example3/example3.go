@@ -39,6 +39,7 @@ func main() {
 	fmt.Println("\nWhat the Compiler is Doing:")
 
 	// This is what Go is doing underneath.
+	// ----- ruben: this is only for us to see how is done internally, we must never use this way to call methods:
 	data.displayName(d)
 	(*data).setAge(&d, 45)
 
@@ -58,6 +59,10 @@ func main() {
 	d.name = "Joan"
 
 	// Call the method via the variable. We don't see the change.
+	// ----- ruben
+	// Since the function used in the variable f1 is defined as value semantics,
+	// then f1 is using its own copy of d, that is why it prints ‘Bill’ and not ‘Joan’.
+	// ----- ruben
 	f1()
 
 	// =========================================================================
@@ -73,6 +78,10 @@ func main() {
 	f2(45)
 
 	// Change the value of d.
+	// ----- ruben
+	// for f2 it uses pointer receiver, so it does NOT have its own copy,
+	// it points to d and updates it to ‘Sammy’:
+	// ----- ruben
 	d.name = "Sammy"
 
 	// Call the method via the variable. We see the change.
